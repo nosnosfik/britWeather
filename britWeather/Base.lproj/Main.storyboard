@@ -16,7 +16,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0r3-CG-Cvg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="1" id="91Y-tk-h0d" customClass="StationTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -34,7 +34,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="GKV-RF-rSN"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="stationSegue" id="6eH-LN-5Hz"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="stationSegue" id="6eH-LN-5Hz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eza-Kn-4yt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -52,18 +52,37 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZX-SX-DE1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3ZX-SX-DE1" secondAttribute="bottom" id="G3e-NK-f00"/>
+                            <constraint firstItem="3ZX-SX-DE1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OJb-iV-eyg"/>
+                            <constraint firstItem="3ZX-SX-DE1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hpN-4V-R8s"/>
+                            <constraint firstAttribute="trailing" secondItem="3ZX-SX-DE1" secondAttribute="trailing" id="lAq-Ve-kAl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="weatherText" destination="3ZX-SX-DE1" id="s40-CC-qAc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="822" y="114"/>
+            <point key="canvasLocation" x="511" y="114"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8uC-uU-9yk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9wt-0r-JvZ" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H4t-4m-vlV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -75,7 +94,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIH-PE-8BO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-572" y="113.79310344827587"/>
+            <point key="canvasLocation" x="-322" y="114"/>
         </scene>
     </scenes>
 </document>

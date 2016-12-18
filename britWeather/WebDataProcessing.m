@@ -40,5 +40,27 @@
 
 }
 
+- (void)requestTextFile:(NSString*)urlString {
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSString* content = [NSString stringWithContentsOfFile:filePath.relativePath encoding:NSUTF8StringEncoding error:NULL];
+        NSLog(@"content = %@", content);
+        if ([self.delegate respondsToSelector:@selector(webDataProcessing:didUpdateWithWeather:)]) {
+            [self.delegate webDataProcessing:self didUpdateWithWeather:content];
+        }
+    }];
+    [downloadTask resume];
+}
+
+
 
 @end

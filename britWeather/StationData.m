@@ -17,7 +17,7 @@
         
         self.stationWebPath = _stationWebPath;
         self.stationDescription = _stationDescription;
-        self.stations = _stations;
+      
     }
     return self;
 }

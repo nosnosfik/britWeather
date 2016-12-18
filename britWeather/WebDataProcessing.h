@@ -18,14 +18,14 @@
 
 + (id)sharedManager;
 -(void) getWebData:(NSString*)webURL;
-
-
+- (void)requestTextFile:(NSString*)urlString;
 
 @end
 
 @protocol WebDataProcessingDelegate <NSObject>
 
 -(void)webDataProcessing:(WebDataProcessing *)client didUpdateWithStations:(id)stations;
+-(void)webDataProcessing:(WebDataProcessing *)client didUpdateWithWeather:(id)weather;
 -(void)webDataProcessing:(WebDataProcessing *)client didFailWithError:(NSError *)error;
 
 @end

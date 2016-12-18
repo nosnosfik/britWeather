@@ -8,6 +8,7 @@
 
 #import "StationsTableViewController.h"
 #import "StationTableViewCell.h"
+#import "WeatherViewController.h"
 
 static NSString *const stationsURL = @"https://data.gov.uk/dataset/historic-monthly-meteorological-station-data/datapackage.json";
 
@@ -15,12 +16,14 @@ static NSString *const stationsURL = @"https://data.gov.uk/dataset/historic-mont
 
 @property(strong,nonatomic) NSDictionary *stations;
 @property(strong,nonatomic) NSArray *stationsTitles;
+@property (strong,nonatomic) NSString *segueStationWebData;
 
 @end
 
 @implementation StationsTableViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"stationCell" bundle:nil] forCellReuseIdentifier:@"stationCell"];
@@ -32,13 +35,6 @@ static NSString *const stationsURL = @"https://data.gov.uk/dataset/historic-mont
     [client getWebData:stationsURL];
 
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -62,6 +58,15 @@ static NSString *const stationsURL = @"https://data.gov.uk/dataset/historic-mont
     cell.stationName.text = stationData.stationDescription;
 
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    StationData *stationData = self.stationsTitles[indexPath.row];
+    
+    self.segueStationWebData = stationData.stationWebPath;
+    [self performSegueWithIdentifier:@"stationSegue" sender:self];
+    
 }
 
 -(void)webDataProcessing:(WebDataProcessing *)client didUpdateWithStations:(id)stations{
@@ -102,18 +107,18 @@ static NSString *const stationsURL = @"https://data.gov.uk/dataset/historic-mont
 
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)webDataProcessing:(WebDataProcessing *)client didUpdateWithWeather:(id)weather{
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"stationSegue"]) {
+        
+        WeatherViewController *vc = [segue destinationViewController];
+        
+        vc.stationWebData = self.segueStationWebData;
+
+    }
 }
-*/
 
 @end

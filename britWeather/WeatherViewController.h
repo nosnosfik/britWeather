@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebDataProcessing.h"
 
-@interface WeatherViewController : UIViewController
+@interface WeatherViewController : UIViewController <WebDataProcessingDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextView *weatherText;
+
+@property (strong,nonatomic) NSString *stationWebData;
 
 @end
 

@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) NSString *stationWebPath;
 @property (strong, nonatomic) NSString *stationDescription;
-@property(strong,nonatomic) NSArray *stations;
+
 
 @end
